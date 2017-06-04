@@ -1,7 +1,7 @@
-
-    <!DOCTYPE html> <html> 
-    <head>
-    <style>
+	<!DOCTYPE html> 
+	<html> 
+  	<head>
+    	<style>
 		.dropbtn {
     		background-color: #4CAF50;
     		color: white;
@@ -48,12 +48,19 @@
           position:absolute; font-size:12px; 
         	font-family:tahoma;
         	}
+        
+        #TimedQuiz { 
+            top:160px; left:330px; 						
+          position:absolute; font-size:18px; 
+        	font-family:arial; background-color:#ffffff;
+        	}
+        
         a { color:#ffffff; } 
             
             
-    </style>
+   	</style>
        
-    <script>
+   	<script>
 
          function checkSelection() {
            var Bird=document.getElementById("Birds");
@@ -65,9 +72,7 @@
             }
        
        
-    function ThinkTank(){
-        /* Start the Thanks() Function every 2 minutes */
-	      var IdeaGuy = setInterval(ThinkTank, 1200000);    
+    function ThinkTank(){    
     
         /* Variables for Storing User Input */
 	      var Time = Date();
@@ -90,12 +95,48 @@
                 }
         /* Stop the ThinkTank() function */
       }
+       
+         Countdown();
+  	function Countdown() {
+     	// Loop Countdown() - every 1000 milliseconds = 1 second.   
+      	var timer = setTimeout(Countdown, 1000);
+      
+    	// Control the Output in the "clock" element  
+    	var seconds = document.getElementById('clock').innerHTML;
+    	// Decrement (decrease) the Output in the "clock" element by one.
+    	seconds--;
+    
+    	// Display the amounts left on the "clock" element.
+    	var message = document.getElementById('clock');
+    	message.innerHTML = seconds;
+      
+    	// If the user inputs the correct answer, stop (clear) the timer.  
+    	var input = document.getElementById("answer");
+      	if (input.value =="fruit") {
+          message.innerHTML = "Correct!"; 
+          clearInterval(timer);
+          input.style.backgroundColor="#00ff00"; 
+          input.style.color="#ffffff";
+      }
+      
+       if (input.value =="vegetable") {
+          alert("Incorrect."); 
+          input.style.backgroundColor="#ffffff"; 
+          input.style.color="#ff0000";
+      }
+      
+      if (seconds==0) { 
+          message.innerHTML = "TIME'S UP!"; 
+          clearInterval(timer);
+          input.style.backgroundColor="#ff0000"; 
+          input.style.color="#ff0000";}
+  	}
 
     </script>
 	
-    </head>
+  	</head>
 
-    <body style="background-image:url('image.png'); background-repeat:no-repeat; background-color:#567;" onload="ThinkTank();" >
+	<body style="background-image:url('image.png'); background-repeat:no-repeat; background-color:#567;" onload="ThinkTank();" >
 
 	<div class="dropdown">
   	<button class="dropbtn">Dropdown</button>
@@ -113,7 +154,7 @@
         CLICK HERE </a>
     </div>
 
-    <div id="TANK" style="background-color:#ff6; width:300px; height:350px; color:teal;" ontouchmove="ThinkTank();" onmouseover="ThinkTank();"> 
+    <div id="TANK" style="background-color:#ff6; width:300px; height:350px; color:teal;"> 
     <b> Think Tank </b> <hr> 
 	</div>
 
@@ -127,6 +168,12 @@
         <button onclick="checkSelection()" ontouchstart="checkSelection()">Submit</button>
 	</div>
 
+    <div id="TimedQuiz">
+    Time Left:
+	<b id="clock" style="color:#0000ff;">10</b> <br>
+	<b id="question" style="color:#ff0000;"> Is an Apple a "fruit" or "vegetable"? </b> <br>
+	<input id="answer" />
+    	</div>
 
 	</body>
-    </html>
+	</html>
